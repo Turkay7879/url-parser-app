@@ -36,7 +36,8 @@ function App() {
       <h1>URL Parameters Parser</h1>
 
       <p className="full-url-text">
-        <strong>Full URL:</strong> {urlData.fullUrl}
+        <strong>Full URL:</strong>{" "}
+        <span dangerouslySetInnerHTML={{ __html: urlData.fullUrl }} />
       </p>
 
       <h2>Path Components</h2>
@@ -73,7 +74,9 @@ function App() {
           {Object.keys(urlData.queryParams).map((key) => (
             <tr key={key}>
               <td>{key}</td>
-              <td>{urlData.queryParams[key]}</td>
+              <td
+                dangerouslySetInnerHTML={{ __html: urlData.queryParams[key] }}
+              />
             </tr>
           ))}
         </tbody>
