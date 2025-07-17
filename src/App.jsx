@@ -5,16 +5,19 @@ function App() {
   const [urlData, setUrlData] = useState(null);
 
   useEffect(() => {
-    // Get the current URL from the browser's address bar
-    const currentUrl = window.location.href;
+    const redirectPath = window.sessionStorage.getItem("redirect");
+    window.sessionStorage.removeItem("redirect");
 
-    // Use the URL constructor to parse the URL
-    const parsedUrl = new URL(currentUrl);
+    const urlToParse = redirectPath
+      ? window.location.origin + window.location.pathname + redirectPath
+      : window.location.href;
 
-    // Split the pathname into its parts
-    const pathParts = parsedUrl.pathname.split("/").filter((part) => part);
+    const parsedUrl = new URL(urlToParse);
 
-    // Convert the query parameters to an object
+    const pathParts = parsedUrl.pathname
+      .split("/")
+      .filter((part) => part && part !== "url-parser-app");
+
     const queryParams = {};
     for (let [key, value] of parsedUrl.searchParams.entries()) {
       queryParams[key] = value;
@@ -26,7 +29,7 @@ function App() {
       pathParts: pathParts,
       queryParams: queryParams,
     });
-  }, []); // This useEffect runs only once when the component mounts
+  }, []);
 
   if (!urlData) {
     return <div>Loading...</div>;

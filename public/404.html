@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>URL Parser - Redirecting...</title>
+    <script type="text/javascript">
+      var path = window.location.pathname;
+      var query = window.location.search;
+      var L = window.location.pathname.split("/").length;
+
+      var newPath = path.slice(path.split("/", 2).join("/").length);
+      window.sessionStorage.redirect = newPath + query;
+      window.location.replace("/url-parser-app/");
+    </script>
+  </head>
+  <body></body>
+</html>
