@@ -5,15 +5,11 @@ function App() {
   const [urlData, setUrlData] = useState(null);
 
   useEffect(() => {
-    const redirectPath = window.sessionStorage.getItem("redirect");
+    const redirectedUrl = window.sessionStorage.getItem("redirect");
     window.sessionStorage.removeItem("redirect");
 
-    const urlToParse = redirectPath
-      ? window.location.origin + window.location.pathname + redirectPath
-      : window.location.href;
-
+    const urlToParse = redirectedUrl || window.location.href;
     const parsedUrl = new URL(urlToParse);
-
     const pathParts = parsedUrl.pathname
       .split("/")
       .filter((part) => part && part !== "url-parser-app");

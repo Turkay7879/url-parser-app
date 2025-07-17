@@ -4,12 +4,7 @@
     <meta charset="utf-8" />
     <title>URL Parser - Redirecting...</title>
     <script type="text/javascript">
-      var path = window.location.pathname;
-      var query = window.location.search;
-      var L = window.location.pathname.split("/").length;
-
-      var newPath = path.slice(path.split("/", 2).join("/").length);
-      window.sessionStorage.redirect = newPath + query;
+      sessionStorage.redirect = window.location.href;
       window.location.replace("/url-parser-app/");
     </script>
   </head>
